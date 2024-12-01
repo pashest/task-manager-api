@@ -1,0 +1,27 @@
+enum TaskStatus {
+  CREATED
+  IN_PROGRESS
+  COMPLETED
+  CANCELED
+}
+
+type Task {
+    id: ID!
+    title: String!
+    description: String
+    status: TaskStatus!
+    createdAt: Timestamp!
+}
+
+type Query {
+    tasks: [Task!]!
+    task(id: ID!): Task
+}
+
+type Mutation {
+    createTask(title: String!, description: String, status: TaskStatus = CREATED): Task!
+    updateTask(id: ID!, title: String!, description: String, status: TaskStatus): Task
+    deleteTask(id: ID!): Boolean!
+}
+
+scalar Timestamp
